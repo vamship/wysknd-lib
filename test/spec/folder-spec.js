@@ -52,28 +52,28 @@ describe('folder: ', function() {
     describe('folder.traverse(): ', function() {
         beforeEach(function() {
             _testFs.createFolders(ROOT_DIR,
-                                    APP_DIR,
-                                    SCRIPTS_DIR,
-                                    CONTROLLERS_DIR,
-                                    DIRECTIVES_DIR);
+                APP_DIR,
+                SCRIPTS_DIR,
+                CONTROLLERS_DIR,
+                DIRECTIVES_DIR);
 
             _testFs.createFiles(APP_JS,
-                                TEST_CONTROLLER_JS,
-                                TEST_DIRECTIVE_JS,
-                                SYM_LINK);
+                TEST_CONTROLLER_JS,
+                TEST_DIRECTIVE_JS,
+                SYM_LINK);
         });
 
         afterEach(function() {
             _testFs.cleanupFiles(APP_JS,
-                                    TEST_CONTROLLER_JS,
-                                    TEST_DIRECTIVE_JS,
-                                    SYM_LINK);
+                TEST_CONTROLLER_JS,
+                TEST_DIRECTIVE_JS,
+                SYM_LINK);
 
             _testFs.cleanupFolders(DIRECTIVES_DIR,
-                                    CONTROLLERS_DIR,
-                                    SCRIPTS_DIR,
-                                    APP_DIR,
-                                    ROOT_DIR);
+                CONTROLLERS_DIR,
+                SCRIPTS_DIR,
+                APP_DIR,
+                ROOT_DIR);
         });
 
         it('should correctly traverse a nested folder structure.', function(done) {
@@ -136,31 +136,31 @@ describe('folder: ', function() {
     describe('folder.createFolder(): ', function() {
         beforeEach(function() {
             _testFs.createFolders(ROOT_DIR,
-                                    APP_DIR,
-                                    SCRIPTS_DIR,
-                                    CONTROLLERS_DIR,
-                                    DIRECTIVES_DIR);
+                APP_DIR,
+                SCRIPTS_DIR,
+                CONTROLLERS_DIR,
+                DIRECTIVES_DIR);
 
             _testFs.createFiles(APP_JS,
-                                TEST_CONTROLLER_JS,
-                                TEST_DIRECTIVE_JS,
-                                SYM_LINK);
+                TEST_CONTROLLER_JS,
+                TEST_DIRECTIVE_JS,
+                SYM_LINK);
         });
 
         afterEach(function() {
             _testFs.cleanupFiles(APP_JS,
-                                    TEST_CONTROLLER_JS,
-                                    TEST_DIRECTIVE_JS,
-                                    SYM_LINK);
+                TEST_CONTROLLER_JS,
+                TEST_DIRECTIVE_JS,
+                SYM_LINK);
 
             _testFs.cleanupFolders(DIRECTIVES_DIR,
-                                    CONTROLLERS_DIR,
-                                    SCRIPTS_DIR,
-                                    SPEC_DIR,
-                                    FUNC_DIR,
-                                    TEST_DIR,
-                                    APP_DIR,
-                                    ROOT_DIR);
+                CONTROLLERS_DIR,
+                SCRIPTS_DIR,
+                SPEC_DIR,
+                FUNC_DIR,
+                TEST_DIR,
+                APP_DIR,
+                ROOT_DIR);
         });
 
         it('should expose the the methods required by the interface', function() {
