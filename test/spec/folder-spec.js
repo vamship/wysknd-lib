@@ -2,7 +2,8 @@ var _path = require('path');
 var _fs = require('fs');
 
 var _folder = require('../../lib/folder');
-var _testUtils = require('../test-utils');
+var _testObj = require('wysknd-test').object;
+var _testFs = require('wysknd-test').fs;
 
 describe('folder: ', function() {
     // Declaration of file and folder definitions. Nothing is being created
@@ -38,28 +39,39 @@ describe('folder: ', function() {
     };
 
     it('should expose the the methods required by the interface', function() {
-        _testUtils.verifyInterface(_folder, {
+        var errors = _testObj.verifyInterface(_folder, {
             'traverse': 'function',
             'createFolder': 'function',
             'createFolderTree': 'function'
         });
+        expect(errors).toEqual([]);
     });
 
     describe('folder.traverse(): ', function() {
         beforeEach(function() {
-            _testUtils.createFolders(ROOT_DIR, APP_DIR, SCRIPTS_DIR,
-                CONTROLLERS_DIR, DIRECTIVES_DIR);
+            _testFs.createFolders(ROOT_DIR,
+                                    APP_DIR,
+                                    SCRIPTS_DIR,
+                                    CONTROLLERS_DIR,
+                                    DIRECTIVES_DIR);
 
-            _testUtils.createFiles(APP_JS, TEST_CONTROLLER_JS,
-                TEST_DIRECTIVE_JS, SYM_LINK);
+            _testFs.createFiles(APP_JS,
+                                TEST_CONTROLLER_JS,
+                                TEST_DIRECTIVE_JS,
+                                SYM_LINK);
         });
 
         afterEach(function() {
-            _testUtils.cleanupFiles(APP_JS, TEST_CONTROLLER_JS,
-                TEST_DIRECTIVE_JS, SYM_LINK);
+            _testFs.cleanupFiles(APP_JS,
+                                    TEST_CONTROLLER_JS,
+                                    TEST_DIRECTIVE_JS,
+                                    SYM_LINK);
 
-            _testUtils.cleanupFolders(DIRECTIVES_DIR, CONTROLLERS_DIR,
-                SCRIPTS_DIR, APP_DIR, ROOT_DIR);
+            _testFs.cleanupFolders(DIRECTIVES_DIR,
+                                    CONTROLLERS_DIR,
+                                    SCRIPTS_DIR,
+                                    APP_DIR,
+                                    ROOT_DIR);
         });
 
         it('should correctly traverse a nested folder structure.', function(done) {
@@ -121,26 +133,38 @@ describe('folder: ', function() {
 
     describe('folder.createFolder(): ', function() {
         beforeEach(function() {
-            _testUtils.createFolders(ROOT_DIR, APP_DIR, SCRIPTS_DIR,
-                CONTROLLERS_DIR, DIRECTIVES_DIR);
+            _testFs.createFolders(ROOT_DIR,
+                                    APP_DIR,
+                                    SCRIPTS_DIR,
+                                    CONTROLLERS_DIR,
+                                    DIRECTIVES_DIR);
 
-            _testUtils.createFiles(APP_JS, TEST_CONTROLLER_JS,
-                TEST_DIRECTIVE_JS, SYM_LINK);
+            _testFs.createFiles(APP_JS,
+                                TEST_CONTROLLER_JS,
+                                TEST_DIRECTIVE_JS,
+                                SYM_LINK);
         });
 
         afterEach(function() {
-            _testUtils.cleanupFiles(APP_JS, TEST_CONTROLLER_JS,
-                TEST_DIRECTIVE_JS, SYM_LINK);
+            _testFs.cleanupFiles(APP_JS,
+                                    TEST_CONTROLLER_JS,
+                                    TEST_DIRECTIVE_JS,
+                                    SYM_LINK);
 
-            _testUtils.cleanupFolders(DIRECTIVES_DIR, CONTROLLERS_DIR,
-                SCRIPTS_DIR, SPEC_DIR, FUNC_DIR,
-                TEST_DIR, APP_DIR, ROOT_DIR);
+            _testFs.cleanupFolders(DIRECTIVES_DIR,
+                                    CONTROLLERS_DIR,
+                                    SCRIPTS_DIR,
+                                    SPEC_DIR,
+                                    FUNC_DIR,
+                                    TEST_DIR,
+                                    APP_DIR,
+                                    ROOT_DIR);
         });
 
         it('should expose the the methods required by the interface', function() {
             var folder = _folder.createFolder('./test');
 
-            _testUtils.verifyInterface(folder, {
+            var errors = _testObj.verifyInterface(folder, {
                 'getName': 'function',
                 'getPath': 'function',
                 'getAbsolutePath': 'function',
@@ -152,6 +176,7 @@ describe('folder: ', function() {
                 'ensureFolder': 'function',
                 'ensureFolderTree': 'function'
             });
+            expect(errors).toEqual([]);
         });
 
         it('should return the folder name of a delimited folder string correctly', function() {

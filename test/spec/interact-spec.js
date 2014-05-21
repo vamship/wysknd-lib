@@ -1,14 +1,15 @@
 var _utils = require('../../lib/utils');
 var _promise = require('../../lib/promise');
 var _interact = require('../../lib/interact');
-var _testUtils = require('../test-utils');
+var _testObj = require('wysknd-test').object;
 
 describe('interact: ', function() {
     it('should expose the the methods required by the interface', function() {
-        _testUtils.verifyInterface(_interact, {
+        var errors = _testObj.verifyInterface(_interact, {
             'ask': 'function',
             'createProgressReporter': 'function'
         });
+        expect(errors).toEqual([]);
     });
 
     describe('interact.ask(): ', function() {
@@ -125,12 +126,13 @@ describe('interact: ', function() {
             reporter.stop();
         });
         it('should expose all methods required by the interface', function() {
-            _testUtils.verifyInterface(reporter, {
+            var errors = _testObj.verifyInterface(reporter, {
                 'addTracker': 'function',
                 'start': 'function',
                 'stop': 'function',
                 'hasStarted': 'function'
             });
+            expect(errors).toEqual([]);
         });
 
         //TODO: This needs to be worked out. We need some way to check stdout and
@@ -179,12 +181,13 @@ describe('interact: ', function() {
         describe('interact.createProgressReporter().track(): ', function() {
             it('should expose all methods required by the interface', function() {
                 var tracker = reporter.addTracker();
-                _testUtils.verifyInterface(tracker, {
+                var errors = _testObj.verifyInterface(tracker, {
                     'getMessage': 'function',
                     'success': 'function',
                     'fail': 'function',
                     'inProgress': 'function'
                 });
+                expect(errors).toEqual([]);
             });
 
             it('should return a status message with ellipsis when the task is still pending', function() {

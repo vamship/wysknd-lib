@@ -2,7 +2,7 @@ var _path = require('path');
 
 var _folder = require('../../lib/folder');
 var _template = require('../../lib/template');
-var _testUtils = require('../test-utils');
+var _testObj = require('wysknd-test').object;
 
 describe('template: ', function() {
     var ROOT_DIR = _path.join(__dirname, '../..', '.tmp');
@@ -23,29 +23,12 @@ describe('template: ', function() {
         path: _path.join(TEMPLATE_DIR, 'controller-spec-template.js'),
         content: '// TODO: This template needs some content.'
     };
-    /*
-        beforeEach(function(){
-            _testUtils.createFolders(ROOT_DIR, TARGET_DIR, SCRIPTS_DIR,
-                                        CONTROLLERS_DIR, DIRECTIVES_DIR);
-
-            _testUtils.createFiles(APP_JS, TEST_CONTROLLER_JS,
-                                            TEST_DIRECTIVE_JS, SYM_LINK);
-        });
-
-        afterEach(function() {
-            _testUtils.cleanupFiles(APP_JS, TEST_CONTROLLER_JS,
-                                            TEST_DIRECTIVE_JS, SYM_LINK);
-
-            _testUtils.cleanupFolders(DIRECTIVES_DIR, CONTROLLERS_DIR,
-                                        SCRIPTS_DIR, TARGET_DIR, ROOT_DIR);
-        });
-
-    */
 
     it('should expose the the methods required by the interface', function() {
-        _testUtils.verifyInterface(_template, {
+        var errors = _testObj.verifyInterface(_template, {
             'getTemplater': 'function'
         });
+        expect(errors).toEqual([]);
     });
 
     describe('template.getTemplater(): ', function() {
@@ -87,11 +70,12 @@ describe('template: ', function() {
             var targetFolder = _folder.createFolder(TARGET_DIR);
 
             var templater = _template.getTemplater(templFolder, targetFolder);
-            _testUtils.verifyInterface(templater, {
+            var errors = _testObj.verifyInterface(templater, {
                 'getItemTypes': 'function',
                 'getArtifacts': 'function',
                 'createItem': 'function'
             });
+            expect(errors).toEqual([]);
         });
     });
 

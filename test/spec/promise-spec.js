@@ -1,5 +1,5 @@
 var _promise = require('../../lib/promise');
-var _testUtils = require('../test-utils.js');
+var _testObj = require('wysknd-test').object;
 
 describe('promise: ', function() {
     var def;
@@ -21,7 +21,7 @@ describe('promise: ', function() {
     describe('promise.deferred(): ', function() {
 
         it('should expose the the methods required by the interface', function() {
-            _testUtils.verifyInterface(def, {
+            var errors = _testObj.verifyInterface(def, {
                 'done': 'function',
                 'success': 'function',
                 'fail': 'function',
@@ -31,6 +31,7 @@ describe('promise: ', function() {
                 'getResolver': 'function',
                 'getMultiStepResolver': 'function'
             });
+            expect(errors).toEqual([]);
         });
 
         it('should invoke the success and done callbacks when resolved', function() {
@@ -109,12 +110,15 @@ describe('promise: ', function() {
             it('should expose methods required by the interface', function() {
                 var promise = def.promise();
 
-                _testUtils.verifyInterface(promise, {
+                //TODO: This test is bogus. Given that the promise is a cloned
+                //object, it has no own properties.
+                var errors = _testObj.verifyInterface(promise, {
                     'done': 'function',
                     'success': 'function',
                     'fail': 'function',
                     'results': 'function'
                 });
+                expect(errors).toEqual([]);
             });
 
             it('should allow callers to listen for resolutions', function() {
@@ -193,10 +197,11 @@ describe('promise: ', function() {
             it('should expose methods required by the interface', function() {
                 var resolver = def.getMultiStepResolver(5);
 
-                _testUtils.verifyInterface(resolver, {
+                var errors = _testObj.verifyInterface(resolver, {
                     'stepComplete': 'function',
                     'reject': 'function'
                 });
+                expect(errors).toEqual([]);
             });
 
             it('should reject immediately when reject() is called', function() {

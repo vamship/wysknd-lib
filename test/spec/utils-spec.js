@@ -3,11 +3,12 @@ var _fs = require('fs');
 var _stream = require('stream');
 
 var _utils = require('../../lib/utils');
-var _testUtils = require('../test-utils');
+var _testObj = require('wysknd-test').object;
+var _testFs = require('wysknd-test').fs;
 
 describe('utils: ', function() {
     it('should expose the the methods required by the interface', function() {
-        _testUtils.verifyInterface(_utils, {
+        var errors = _testObj.verifyInterface(_utils, {
             'getAngularJSName': 'function',
             'padRight': 'function',
             'padLeft': 'function',
@@ -15,6 +16,7 @@ describe('utils: ', function() {
             'getTransformer': 'function',
             'transformFile': 'function'
         });
+        expect(errors).toEqual([]);
     });
 
     describe('utils.getAngularJSName(): ', function() {
@@ -235,13 +237,13 @@ describe('utils: ', function() {
         }
 
         beforeEach(function() {
-            _testUtils.createFolders(ROOT_DIR);
-            _testUtils.createFiles(INPUT_FILE);
+            _testFs.createFolders(ROOT_DIR);
+            _testFs.createFiles(INPUT_FILE);
         });
 
         afterEach(function() {
-            _testUtils.cleanupFiles(INPUT_FILE);
-            _testUtils.cleanupFolders(ROOT_DIR);
+            _testFs.cleanupFiles(INPUT_FILE);
+            _testFs.cleanupFolders(ROOT_DIR);
         });
 
         function _verifyFile(filePath, contents, done) {
@@ -251,7 +253,7 @@ describe('utils: ', function() {
                     done();
                 } else {
                     expect(data.toString()).toBe(contents);
-                    _testUtils.cleanupFiles({
+                    _testFs.cleanupFiles({
                         path: filePath
                     });
                     done();
