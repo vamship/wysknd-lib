@@ -1,3 +1,5 @@
+'use strict';
+
 var _promise = require('../../lib/promise');
 var _testObj = require('wysknd-test').object;
 

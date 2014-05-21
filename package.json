@@ -26,6 +26,6 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "wysknd-test": "git+https://github.com/vamship/wysknd-test.git"
+    "wysknd-test": "git+https://github.com/vamship/wysknd-test.git#v0.0.1"
   }
 }

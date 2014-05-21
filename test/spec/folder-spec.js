@@ -1,3 +1,5 @@
+'use strict';
+
 var _path = require('path');
 var _fs = require('fs');
 

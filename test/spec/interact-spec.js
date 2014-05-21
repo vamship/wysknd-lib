@@ -1,3 +1,5 @@
+'use strict';
+
 var _utils = require('../../lib/utils');
 var _promise = require('../../lib/promise');
 var _interact = require('../../lib/interact');
@@ -151,7 +153,7 @@ describe('interact: ', function() {
                         done();
                         //process.stdout.write = oldWrite;
                     };
-                }, 00);
+                }, 100);
                 reporter.start();
             }, 2000);
         });
