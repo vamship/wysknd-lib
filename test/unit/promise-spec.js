@@ -249,4 +249,44 @@ describe('promise: ', function() {
             });
         });
     });
+
+    describe('promise.all()', function() {
+        var successfulPromises = []
+        var failedPromises = [];
+
+        beforeEach(function() {
+            for(var index=0; index<5; index++) {
+                var success = _promise.deferred();
+                success.resolve('OK');
+
+                successfulPromises.push(success.promise());
+
+                var failure = _promise.deferred();
+                failure.reject('ERROR', 'DONE');
+
+                failedPromises.push(failure.promise());
+            }
+        });
+
+        it('should invoke invoke the callback if the input array has no promises', function(done) {
+           _promise.all([], function(successes, failures) {
+               expect(successes instanceof Array).toBe(true);
+               expect(successes.length).toBe(0);
+
+               expect(failures instanceof Array).toBe(true);
+               expect(failures.length).toBe(0);
+               done();
+           });
+        });
+
+        it('should invoke invoke the callback with the correct number of successful and failed promises', function(done) {
+            var promises = successfulPromises.concat(failedPromises);
+           _promise.all(promises, function(successes, failures) {
+               expect(successes.length).toBe(successfulPromises.length);
+               expect(failures.length).toBe(failedPromises.length);
+               done();
+           });
+        });
+    });
+
 });
