@@ -24,7 +24,6 @@
   ],
   "author": "Vamshi K Ponnapalli",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "chai": "^1.9.1",
     "wysknd-test": "git+https://github.com/vamship/wysknd-test.git#v0.0.1"
